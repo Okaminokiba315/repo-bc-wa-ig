@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Broadcast WA</title>
     <meta charset="UTF-8" />
@@ -36,17 +37,119 @@
         padding-bottom: 1%;
         padding-left: 1%;
     }
+    
+    #final {
+        background-color: rgba(113, 100, 228, 0.729);
+        padding-top: 1%;
+        padding-bottom: 1%;
+        padding-left: 1%;
+    }
 </style>
 <script>
-    $("#submit").onclick(function() {
-        var date = $("#datepicker").datepicker("getDate");
-        $("#placeholder").text(date);
-    });
+    function update() {
+        var select = document.getElementById('pilihtarget');
+        var option = select.options[select.selectedIndex];
+        document.getElementById('text1').value = option.text;
+    }
+
+    update();
+
+    function update2() {
+        var select = document.getElementById('pilihtarget2');
+        var option = select.options[select.selectedIndex];
+
+        document.getElementById('text2').value = option.text;
+    }
+
+    update2();
+
+    function update3() {
+        var select = document.getElementById('pilihtarget3');
+        var option = select.options[select.selectedIndex];
+
+        document.getElementById('text3').value = option.text;
+    }
+
+    update3();
+
+    function pilihtanggal() {
+        var x = document.getElementById("datepicker");
+        var currentVal = x.value;
+        currentValString = currentVal.toString();
+        var pickmonth = currentValString.substring(5, 7);
+        var bulan;
+        if (pickmonth == '01') {
+            bulan = "Januari";
+        } else if (pickmonth == '02') {
+            bulan = "Februari";
+        } else if (pickmonth == '03') {
+            bulan = "Maret";
+        } else if (pickmonth == '04') {
+            bulan = "April";
+        } else if (pickmonth == '05') {
+            bulan = "Mei";
+        } else if (pickmonth == '06') {
+            bulan = "Juni";
+        } else if (pickmonth == '07') {
+            bulan = "Juli";
+        } else if (pickmonth == '08') {
+            bulan = "Agustus";
+        } else if (pickmonth == '09') {
+            bulan = "September";
+        } else if (pickmonth == '10') {
+            bulan = "Oktober";
+        } else if (pickmonth == '11') {
+            bulan = "November";
+        } else if (pickmonth == '12') {
+            bulan = "Desember";
+        } else {
+            bulan = "Januari";
+        }
+
+        //var month = pilihbulan(pickmonth)
+        document.getElementById("placeholder").value = currentValString.substring(8) + " " + bulan + " " + currentValString.substring(0, 4);
+
+    }
+
+    function finalize() {
+        var validated = false;
+        var keys = document.getElementById("kunci").value;
+        pass = ["s5menwaui", "kmnmenwaui", "kngmenwaui", "kaurmenwaui"]
+        for (let i = 0; i < pass.length; i++) {
+            if (pass[i] == keys) {
+                alert("Akses diberikan.")
+                validated = true;
+                break;
+            }
+        }
+
+        if (validated == false) {
+            alert("Anda tidak diizinkan menggunakan template ini.Silakan hubungi pihak bersangkutan untuk membuat broadcast WhatsApp Menwa UI.")
+            document.getElementById("final").innerHTML = "Hubungi Humas Menwa UI."
+        } else {
+            var one = document.getElementById("namaacara").value;
+            var two = document.getElementById("lokasiacara").value;
+            var three = document.getElementById("waktugiat").value;
+            var four = document.getElementById("placeholder").value;
+            var five = document.getElementById("text1").value;
+            var six = document.getElementById("text2").value;
+            var seven = document.getElementById("text3").value;
+            //var select1 = document.getElementById('pilihtarget');
+            //var picked1 = select1.options[select.selectedIndex];
+            document.getElementById("final").innerHTML = one + " " + two + " " + three + " " +
+                four + " " + five + " " + six + " " + seven;
+
+
+            document.getElementById("kunci").value = "";
+        }
+        validated = false;
+    }
 </script>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-light">
         <h2>Template Broadcast Whatsapp</h2>
+        <input type="password" class="form-control " id="kunci" placeholder="Tulis Password anda">
     </nav>
     <br>
     <br>
@@ -62,7 +165,7 @@
         <form>
             <div class="form-group mx-sm-3 mb-2">
                 <label for="namaacara">Lokasi/Tautan</label>
-                <input type="email" class="form-control " id="namaacara" placeholder="B8">
+                <input type="email" class="form-control " id="lokasiacara" placeholder="B8">
             </div>
         </form>
 
@@ -73,73 +176,64 @@
             </div>
         </form>
 
-        <form>
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="datepicker">Tanggal Giat:</label>
-                <input type="date" id="datepicker" name="datepicker">
-                <input type="submit" id="submit">
-                <p id="placeholder">a</p>
-            </div>
-        </form>
+
 
         <br>
         <table style="width:100%">
             <tr>
-                <th><label style="font-weight: light;">Sasaran:  </label>
-                    <div class="btn-group">
-
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Pilih
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Caang</a>
-                            <a class="dropdown-item" href="#">Organik</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Umum</a>
-                            <a class="dropdown-item" href="#">Iluni</a>
+                <th>
+                    <form>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="datepicker">Tanggal Giat:</label>
+                            <input type="date" id="datepicker" name="datepicker">
+                            <button type="button" class="btn btn-primary rounded-pill" id="submit" onclick="pilihtanggal()">Set tanggal</button>
+                            <input class="form-control" id="placeholder" value="-" readonly>
                         </div>
-                    </div>
-                </th>
-                <th><label style="font-weight: light;">Jenis Giat:  </label>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Jenis
-                          </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Tugas Dinas</a>
-                            <a class="dropdown-item" href="#">Upacara</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Latihan Rutin</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Undangan</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Lain-lain</a>
-                        </div>
-                    </div>
+                    </form>
                 </th>
                 <th>
-                    <h5>Tingkat Kewajiban</h5>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                        <label style="font-weight: lighter;" class="form-check-label" for="exampleRadios1">
-                          Wajib
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                        <label style="font-weight: lighter;" class="form-check-label" for="exampleRadios2">
-                          Opsional
-                        </label>
-                    </div>
+                    <label style="font-weight: light;">Sasaran:  </label>
+                    <select class="custom-select" id="pilihtarget" onChange="update()">
+                        <option value="ca">Caang</option>
+                        <option value="or">Organik</option>
+                        <option value="il">Iluni</option>
+                        <option value="u">Umum</option>
+                    </select>
+                    <input class="form-control" id="text1" value="-" readonly>
+                </th>
+                <th>
+                    <label style="font-weight: light;">Jenis Giat:  </label>
+                    <select class="custom-select" id="pilihtarget2" onChange="update2()">
+                        <option value="tdin">Tugas Dinas</option>
+                        <option value="upacara">Upacara</option>
+                        <option value="larut">Latihan Rutin</option>
+                        <option value="udgan">Undangan</option>
+                        <option value="lnln">Lain-lain</option>
+                    </select>
+                    <input class="form-control" id="text2" value="-" readonly>
+                </th>
+                <th>
+                    <label style="font-weight: light;">Tingkat Kewajiban:  </label>
+                    <select class="custom-select" id="pilihtarget3" onChange="update3()">
+                        <option value="wj">Wajib</option>
+                        <option value="op">Opsional</option>
+                    </select>
+                    <input class="form-control" id="text3" value="-" readonly>
                 </th>
             </tr>
         </table>
         <br>
         <br>
+        <button type="button" class="btn btn-success rounded-pill" id="submit" onclick="finalize()">Cetak Broadcast</button>
 
+    </div>
+    <br>
+    <div>
+        <p id="final">a</p>
     </div>
 
 
 
 </body>
+
 </html>
