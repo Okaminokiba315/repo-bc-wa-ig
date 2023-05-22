@@ -46,10 +46,15 @@
     }
 </style>
 <script>
+    var textA = "";
+    var textB = "";
+    var textC = "";
+    var tanggal = "";
+
     function update() {
         var select = document.getElementById('pilihtarget');
         var option = select.options[select.selectedIndex];
-        document.getElementById('text1').value = option.text;
+        textA = option.text;
     }
 
     update();
@@ -57,8 +62,7 @@
     function update2() {
         var select = document.getElementById('pilihtarget2');
         var option = select.options[select.selectedIndex];
-
-        document.getElementById('text2').value = option.text;
+        textB = option.text;
     }
 
     update2();
@@ -66,8 +70,7 @@
     function update3() {
         var select = document.getElementById('pilihtarget3');
         var option = select.options[select.selectedIndex];
-
-        document.getElementById('text3').value = option.text;
+        textC = option.text;
     }
 
     update3();
@@ -107,14 +110,15 @@
         }
 
         //var month = pilihbulan(pickmonth)
-        document.getElementById("placeholder").value = currentValString.substring(8) + " " + bulan + " " + currentValString.substring(0, 4);
+        //document.getElementById("placeholder").value = currentValString.substring(8) + " " + bulan + " " + currentValString.substring(0, 4);
+        tanggal = currentValString.substring(8) + " " + bulan + " " + currentValString.substring(0, 4);
 
     }
 
     function finalize() {
         var validated = false;
         var keys = document.getElementById("kunci").value;
-        pass = ["s5menwaui", "kmnmenwaui", "kngmenwaui", "kaurmenwaui"]
+        pass = ["s5menwaui", "s2menwaui", "kmnmenwaui", "kngmenwaui", "kaurmenwaui", "makara08"]
         for (let i = 0; i < pass.length; i++) {
             if (pass[i] == keys) {
                 alert("Akses diberikan.")
@@ -124,35 +128,35 @@
         }
 
         if (validated == false) {
-            alert("Anda tidak diizinkan menggunakan template ini.Silakan hubungi pihak bersangkutan untuk membuat broadcast WhatsApp Menwa UI.")
+            alert("Anda tidak diizinkan menggunakan template ini. Silakan hubungi pihak bersangkutan untuk membuat broadcast WhatsApp Menwa UI.")
             document.getElementById("final").innerHTML = "Hubungi Humas Menwa UI."
         } else {
             var one = document.getElementById("namaacara").value;
             var two = document.getElementById("lokasiacara").value;
             var three = document.getElementById("waktugiat").value;
-            var four = document.getElementById("placeholder").value;
-            var five = document.getElementById("text1").value;
-            var six = document.getElementById("text2").value;
-            var seven = document.getElementById("text3").value;
+            var four = tanggal;
+            var five = textA;
+            var six = textB;
+            var seven = textC;
             //var select1 = document.getElementById('pilihtarget');
             //var picked1 = select1.options[select.selectedIndex];
             document.getElementById("final").innerHTML = one + " " + two + " " + three + " " +
                 four + " " + five + " " + six + " " + seven;
 
 
-            document.getElementById("kunci").value = "";
         }
-        validated = false;
     }
 </script>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-light">
-        <h2>Template Broadcast Whatsapp</h2>
+        <h2>Template Broadcast Whatsapp Menwa UI</h2>
         <input type="password" class="form-control " id="kunci" placeholder="Tulis Password anda">
     </nav>
     <br>
-    <br>
+    <center>
+        <p style="color: beige;">Harap manfaatkan template ini dengan baik dan dilarang menyalahgunakan template.</p>
+    </center><br>
     <div id="textboxx">
         <form>
             <div class="form-group mx-sm-3 mb-2">
@@ -187,22 +191,24 @@
                             <label for="datepicker">Tanggal Giat:</label>
                             <input type="date" id="datepicker" name="datepicker">
                             <button type="button" class="btn btn-primary rounded-pill" id="submit" onclick="pilihtanggal()">Set tanggal</button>
-                            <input class="form-control" id="placeholder" value="-" readonly>
                         </div>
                     </form>
                 </th>
                 <th>
                     <label style="font-weight: light;">Sasaran:  </label>
+                    <br>
                     <select class="custom-select" id="pilihtarget" onChange="update()">
                         <option value="ca">Caang</option>
                         <option value="or">Organik</option>
                         <option value="il">Iluni</option>
                         <option value="u">Umum</option>
                     </select>
-                    <input class="form-control" id="text1" value="-" readonly>
                 </th>
+            </tr>
+            <tr>
                 <th>
                     <label style="font-weight: light;">Jenis Giat:  </label>
+                    <br>
                     <select class="custom-select" id="pilihtarget2" onChange="update2()">
                         <option value="tdin">Tugas Dinas</option>
                         <option value="upacara">Upacara</option>
@@ -210,22 +216,23 @@
                         <option value="udgan">Undangan</option>
                         <option value="lnln">Lain-lain</option>
                     </select>
-                    <input class="form-control" id="text2" value="-" readonly>
                 </th>
+
                 <th>
                     <label style="font-weight: light;">Tingkat Kewajiban:  </label>
+                    <br>
                     <select class="custom-select" id="pilihtarget3" onChange="update3()">
                         <option value="wj">Wajib</option>
                         <option value="op">Opsional</option>
                     </select>
-                    <input class="form-control" id="text3" value="-" readonly>
                 </th>
             </tr>
         </table>
         <br>
         <br>
-        <button type="button" class="btn btn-success rounded-pill" id="submit" onclick="finalize()">Cetak Broadcast</button>
-
+        <center>
+            <button type="button" class="btn btn-success rounded-pill" id="submit" onclick="finalize()">Cetak Broadcast</button>
+        </center>
     </div>
     <br>
     <div>
