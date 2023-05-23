@@ -50,11 +50,25 @@
     var textB = "";
     var textC = "";
     var tanggal = "";
+    var sapaan = "";
+    //var sapaan2 = "";
+    var fulltext = "";
+    var pakaian = "👔 ";
+    var ending = "";
 
     function update() {
         var select = document.getElementById('pilihtarget');
         var option = select.options[select.selectedIndex];
         textA = option.text;
+        if (textA == "Caang") {
+            sapaan = "calon anggota"
+        } else if (textA == "Organik") {
+            sapaan = "rekan-rekan organik"
+        } else if (textA == "Iluni") {
+            sapaan = "Abang-Mbak Iluni Menwa UI"
+        } else {
+            sapaan = "Bapak, Ibu, dan Saudara/i sekalian"
+        }
     }
 
     update();
@@ -63,6 +77,32 @@
         var select = document.getElementById('pilihtarget2');
         var option = select.options[select.selectedIndex];
         textB = option.text;
+        if (textB == "Tugas Dinas") {
+
+            if (textA == "Caang") {
+                pakaian += "Atasan Batik + Celana/Rok Hitam, bagi yang berhijab mengenakan kerudung hitam";
+            } else if (textA == "Organik") {
+                pakaian += "PDL Lengkap";
+            }
+            ending = "Timor Kendal <br> Solo Bandung";
+
+        } else if (textB == "Upacara") {
+            if (textA == "Caang") {
+                pakaian += "Atasan Batik + Celana/Rok Hitam, bagi yang berhijab mengenakan kerudung hitam";
+            } else if (textA == "Organik") {
+                pakaian += "PDL Lengkap";
+            }
+            ending = "Timor Kendal <br> Solo Bandung";
+        } else if (textB == "Latihan Rutin") {
+            if (textA == "Caang") {
+                pakaian += "Kaus Lengan Panjang Hitam + Celana Training Hitam, bagi yang berhijab mengenakan kerudung hitam";
+            } else if (textA == "Organik") {
+                pakaian += "PDL Lengkap";
+            }
+            ending = "Timor Kendal";
+        } else {
+            sapaan = "Bapak, Ibu, dan Saudara/i sekalian"
+        }
     }
 
     update2();
@@ -115,6 +155,10 @@
 
     }
 
+    function pindahig() {
+        alert("Fitur segera hadir")
+    }
+
     function finalize() {
         var validated = false;
         var keys = document.getElementById("kunci").value;
@@ -138,10 +182,14 @@
             var five = textA;
             var six = textB;
             var seven = textC;
+            var eight = document.getElementById("tambahan").value;
             //var select1 = document.getElementById('pilihtarget');
             //var picked1 = select1.options[select.selectedIndex];
+
             document.getElementById("final").innerHTML = one + " " + two + " " + three + " " +
-                four + " " + five + " " + six + " " + seven;
+                four + " " + five + " " + six + " " + seven + eight + ending;
+
+            //document.getElementById("final").innerHTML = eight;
 
 
         }
@@ -149,13 +197,15 @@
 </script>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
         <h2>Template Broadcast Whatsapp Menwa UI</h2>
-        <input type="password" class="form-control " id="kunci" placeholder="Tulis Password anda">
+        <br>
+        <input style="margin-left: 20px; margin-right: 15px;" type="password" class="form-control w-100" id="kunci" placeholder="Tulis Password anda sebelum membuat pesan.">
     </nav>
     <br>
     <center>
-        <p style="color: beige;">Harap manfaatkan template ini dengan baik dan dilarang menyalahgunakan template.</p>
+        <p style="color: beige;">Harap manfaatkan template ini dengan baik dan dilarang menyalahgunakan template.</p><br>
+        <p style="color: beige;">Otomatisasi pembuatan pesan WhatsApp hanya digunakan untuk mempersingkat waktu. <br> Pengguna tetap dihimbau untuk mengecek atau mengedit hasil generasi untuk memastikan kebenaran informasi yang disampaikan.</p>
     </center><br>
     <div id="textboxx">
         <form>
@@ -190,7 +240,7 @@
                         <div class="form-group mx-sm-3 mb-2">
                             <label for="datepicker">Tanggal Giat:</label>
                             <input type="date" id="datepicker" name="datepicker">
-                            <button type="button" class="btn btn-primary rounded-pill" id="submit" onclick="pilihtanggal()">Set tanggal</button>
+                            <button type="button" class="btn btn-primary rounded-pill" id="picks" onclick="pilihtanggal()">Set tanggal</button>
                         </div>
                     </form>
                 </th>
@@ -198,6 +248,7 @@
                     <label style="font-weight: light;">Sasaran:  </label>
                     <br>
                     <select class="custom-select" id="pilihtarget" onChange="update()">
+                        <option value="slect">Pilih</option>
                         <option value="ca">Caang</option>
                         <option value="or">Organik</option>
                         <option value="il">Iluni</option>
@@ -210,6 +261,7 @@
                     <label style="font-weight: light;">Jenis Giat:  </label>
                     <br>
                     <select class="custom-select" id="pilihtarget2" onChange="update2()">
+                        <option value="slect">Pilih</option>
                         <option value="tdin">Tugas Dinas</option>
                         <option value="upacara">Upacara</option>
                         <option value="larut">Latihan Rutin</option>
@@ -222,6 +274,7 @@
                     <label style="font-weight: light;">Tingkat Kewajiban:  </label>
                     <br>
                     <select class="custom-select" id="pilihtarget3" onChange="update3()">
+                        <option value="slect">Pilih</option>
                         <option value="wj">Wajib</option>
                         <option value="op">Opsional</option>
                     </select>
@@ -229,14 +282,20 @@
             </tr>
         </table>
         <br>
+        <form>
+            <center><label style="font-weight: light;" for="tambahan">Ketentuan Tambahan (ketik < br > tanpa spasi  di akhir kata untuk membuat baris baru):</label>
+                <br><textarea id="tambahan" rows="6" cols="40" placeholder="Isi ketentuan tambahan (bila ada) <br> di sini."></textarea>
+            </center>
+        </form>
+        <br>
         <br>
         <center>
-            <button type="button" class="btn btn-success rounded-pill" id="submit" onclick="finalize()">Cetak Broadcast</button>
+            <button type="button" class="btn btn-success rounded-pill" id="yes" onclick="finalize()">Cetak Broadcast</button>
         </center>
     </div>
     <br>
     <div>
-        <p id="final">a</p>
+        <p style="color: beige;" id="final">Preview pesan akan muncul di sini</p>
     </div>
 
 
